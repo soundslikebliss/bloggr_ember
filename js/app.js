@@ -1,6 +1,7 @@
 App = Ember.Application.create();
 
-// define your URLs here:
+// routER
+// define your urls here:
 App.Router.map(function(){
   this.resource('about');
   this.resource('posts', function() {
@@ -10,14 +11,14 @@ App.Router.map(function(){
 
 
 
-// specifies which MODEL a TEMPLATE is backed by here:
-// POSTS route
+// specify which model a template is backed by here:
+// posts ROUTE
 App.PostsRoute = Ember.Route.extend({
   model: function() {
     return posts;
   }
 });
-// POST route
+// post ROUTE
 App.PostRoute = Ember.Route.extend({
   model: function(params) {
     return posts.findBy('id', params.post_id);
@@ -43,6 +44,7 @@ App.PostController = Ember.ObjectController.extend({
 
 
 
+
 // helper to format date, using momentjs library
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
@@ -56,7 +58,7 @@ Ember.Handlebars.helper('format-markdown', function(input){
 
 
 
-// Posts MODEL here:
+// posts MODEL here:
 var posts = [{
   id: '1',
   title: 'First Post',
