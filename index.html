@@ -56,17 +56,24 @@
     {{/if}}
 
     <h1>{{title}}</h1>
-    <h2>by {{author.name}} <small class='muted'>({{date}})</small></h2>
+    <h2>by {{author.name}} <small class='muted'>({{format-date date}})</small></h2>
 
     <hr>
 
     <div class='intro'>
-      {{excerpt}}
+      {{format-markdown excerpt}}
     </div>
 
     <div class='below-the-fold'>
-      {{body}}
+      {{format-markdown body}}
     </div>
+  </script>
+
+
+  <script type="text/x-handlebars" id="post/_edit">
+    <p>{{input type="text" value=title}}</p>
+    <p>{{input type="text" value=excerpt}}</p>
+    <p>{{textarea value=body}}</p>
   </script>
 
 

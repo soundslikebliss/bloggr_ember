@@ -11,17 +11,52 @@ App.Router.map(function(){
 
 
 // specifies which MODEL a TEMPLATE is backed by here:
+// POSTS route
 App.PostsRoute = Ember.Route.extend({
   model: function() {
     return posts;
-  },
-  setupController: function(controller, model) {
-    controller.set('model', model);
+  }
+});
+// POST route
+App.PostRoute = Ember.Route.extend({
+  model: function(params) {
+    return posts.findBy('id', params.post_id);
   }
 });
 
 
-// Posts model here:
+
+
+// CONTROLLER
+App.PostController = Ember.ObjectController.extend({
+    isEditing: false,
+
+    actions: {
+      edit: function() {
+        this.set('isEditing', true);
+      },
+      doneEditing: function() {
+        this.set('isEditing', false);
+      }
+    }
+});
+
+
+
+// helper to format date, using momentjs library
+Ember.Handlebars.helper('format-date', function(date) {
+  return moment(date).fromNow();
+});
+// helper to convert markdown to valid html
+var showdown = new Showdown.converter();
+Ember.Handlebars.helper('format-markdown', function(input){
+  return new  Handlebars.SafeString(showdown.makeHtml(input));
+});
+
+
+
+
+// Posts MODEL here:
 var posts = [{
   id: '1',
   title: 'First Post',
